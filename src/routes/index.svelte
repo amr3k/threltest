@@ -1,13 +1,15 @@
 <script>
   import { Canvas } from "threlte";
   import Scene from "./_Scene.svelte";
-  import Object from "./_Object.svelte";
+  import Path from "./_path.svelte";
+  import Dummy from "./_dummy.svelte";
 </script>
 
 <main>
   <Canvas>
     <Scene />
-    <Object />
+    <Path />
+    <Dummy />
   </Canvas>
 </main>
 

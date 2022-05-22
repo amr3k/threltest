@@ -4,14 +4,14 @@
 
   const { gltf, actions } = useGltfAnimations<"Confused">(({ actions }) => {
     // Either play your animations as soon as they are loaded
-    // actions['Confused']?.play();
-    // console.log(actions['Confused']);
+    // actions['Take 001']?.play();
+    // console.log(actions);
   });
 
   // Or play them whenever you need
   const triggerAnimation = () => {
-    $actions["Confused"]?.play();
-    // animations.Confused.play();
+    console.log("click");
+    // actions["Take 001"]?.play();
   };
   const pointerenter = () => {
     document.body.style.cursor = "pointer";
@@ -22,9 +22,10 @@
 </script>
 
 <GLTF
-  url={"/pathfinder.glb"}
-  position={{ x: 0, y: -0.55, z: 0 }}
-  rotation={{ y: -Math.PI / 1.5 }}
+  url={"/girl.glb"}
+  position={{ x: 2, y: 1.32, z: 0 }}
+  scale={{ x: 0.01, y: 0.01, z: 0.01 }}
+  rotation={{ y: -90 * (Math.PI / 180) }}
   dracoDecoderPath="https://www.gstatic.com/draco/v1/decoders/"
   castShadow
   receiveShadow
