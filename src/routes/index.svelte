@@ -3,6 +3,7 @@
   import Scene from "./_Scene.svelte";
   import Path from "./_path.svelte";
   import Dummy from "./_dummy.svelte";
+  import Duck from "./_duck.svelte";
 </script>
 
 <main>
@@ -10,6 +11,7 @@
     <Scene />
     <Path />
     <Dummy />
+    <Duck />
   </Canvas>
 </main>
 
