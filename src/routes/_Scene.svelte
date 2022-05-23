@@ -9,7 +9,7 @@
   import { CircleGeometry, MeshBasicMaterial } from "three";
 
   const planeMaterial = new MeshBasicMaterial({
-    color: 0xaaaaaa,
+    color: 0xffffff,
     transparent: true,
     shadowSide: 1,
     opacity: 0.8,
@@ -31,9 +31,9 @@
 
 <HemisphereLight intensity={0.01} skyColor={0xffffff} />
 <DirectionalLight
-  intensity={0.1}
+  intensity={0.4}
   color={0xffffff}
-  position={{ x: 1.3, y: 1, z: 4 }}
+  position={{ x: 1.3, y: 2, z: 4 }}
 />
 <Mesh
   material={planeMaterial}

@@ -1,17 +1,34 @@
 <script lang="ts">
-  import { GLTF } from "threlte";
+  import { GLTF, Group, Mesh } from "threlte";
   import { useGltfAnimations } from "$lib/threlte/useGltfAnimations";
+  import type { Group as THREEGroup, Object3D, SkinnedMesh, Bone } from "three";
+
+  let frameVisible = false;
+  let frameObjectArray: (THREEGroup | Object3D | SkinnedMesh | Bone)[] = [];
+
+  let scene: THREEGroup;
+
+  $: if (scene) {
+    // console.log(
+    //   scene.children[0].children[0].children[0].children[0].children[0].children
+    // );
+    scene.traverse((child) => {
+      frameObjectArray.push(child);
+      console.log(child.type);
+    });
+    frameVisible = true;
+  }
 
   const { gltf, actions } = useGltfAnimations<"Confused">(({ actions }) => {
-    // Either play your animations as soon as they are loaded
     // actions['Confused']?.play();
-    // console.log(actions['Confused']);
   });
 
-  // Or play them whenever you need
   const triggerAnimation = () => {
     $actions["Confused"]?.play();
-    // animations.Confused.play();
+    setTimeout(() => {
+      $actions["Confused"]?.stop();
+    }, $actions["Confused"].getClip().duration * 1000);
+    // console.log($actions["Confused"]?.getClip().duration);
   };
   const pointerenter = () => {
     document.body.style.cursor = "pointer";
@@ -21,16 +38,30 @@
   };
 </script>
 
-<GLTF
-  url={"/pathfinder.glb"}
-  position={{ x: -2, y: -0.55, z: 0 }}
+<Group
+  position={{ x: -1, y: -0.55, z: 0 }}
   rotation={{ y: -90 * (Math.PI / 180) }}
-  dracoDecoderPath="https://www.gstatic.com/draco/v1/decoders/"
-  castShadow
-  receiveShadow
-  interactive
-  bind:gltf={$gltf}
-  on:click={triggerAnimation}
-  on:pointerenter={pointerenter}
-  on:pointerleave={pointerleave}
-/>
+>
+  <GLTF
+    url={"/pathfinder.glb"}
+    dracoDecoderPath="https://www.gstatic.com/draco/v1/decoders/"
+    castShadow
+    receiveShadow
+    bind:gltf={$gltf}
+    bind:scene
+  />
+  {#if frameVisible}
+    {#each frameObjectArray as _obj}
+      <Mesh
+        interactive
+        position={{ z: -2 }}
+        rotation={{ x: Math.PI / 2, z: Math.PI / -2 }}
+        geometry={_obj.geometry}
+        material={_obj.material}
+        on:click={triggerAnimation}
+        on:pointerenter={pointerenter}
+        on:pointerleave={pointerleave}
+      />
+    {/each}
+  {/if}
+</Group>

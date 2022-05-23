@@ -10,8 +10,8 @@
   <Canvas>
     <Scene />
     <Path />
-    <Dummy />
-    <Duck />
+    <!-- <Dummy /> -->
+    <!-- <Duck /> -->
   </Canvas>
 </main>
 
