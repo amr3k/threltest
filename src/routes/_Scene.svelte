@@ -5,17 +5,37 @@
     HemisphereLight,
     DirectionalLight,
     Mesh,
+    useTexture,
+    useThrelte,
   } from "threlte";
-  import { CircleGeometry, MeshBasicMaterial } from "three";
+  import {
+    CircleGeometry,
+    MeshBasicMaterial,
+    sRGBEncoding,
+    EquirectangularReflectionMapping,
+  } from "three";
+  import { onDestroy } from "svelte";
 
   const planeMaterial = new MeshBasicMaterial({
-    color: 0xffffff,
+    color: 0x000000,
     transparent: true,
     shadowSide: 1,
     opacity: 0.8,
     side: 2,
   });
   const planeGeo = new CircleGeometry(3, 64);
+
+  const { scene } = useThrelte();
+
+  const bgTexture = useTexture("/bg.jpg");
+  bgTexture.encoding = sRGBEncoding;
+  bgTexture.mapping = EquirectangularReflectionMapping;
+  scene.background = bgTexture;
+
+  onDestroy(() => {
+    // @ts-ignore
+    scene.background.dispose();
+  });
 </script>
 
 <PerspectiveCamera position={{ x: 0, y: 1, z: 3 }} fov={60}>

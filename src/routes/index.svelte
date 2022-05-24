@@ -9,9 +9,9 @@
 <main>
   <Canvas>
     <Scene />
-    <Path />
+    <!-- <Path /> -->
     <!-- <Dummy /> -->
-    <!-- <Duck /> -->
+    <Duck />
   </Canvas>
 </main>
 
