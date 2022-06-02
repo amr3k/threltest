@@ -17,10 +17,7 @@
   import { onDestroy } from "svelte";
 
   const planeMaterial = new MeshBasicMaterial({
-    color: 0x000000,
-    transparent: true,
-    shadowSide: 1,
-    opacity: 0.8,
+    color: 0xffffff,
     side: 2,
   });
   const planeGeo = new CircleGeometry(3, 64);
@@ -33,8 +30,11 @@
   scene.background = bgTexture;
 
   onDestroy(() => {
+    planeMaterial.dispose();
+    planeGeo.dispose();
     // @ts-ignore
     scene.background.dispose();
+    bgTexture.dispose();
   });
 </script>
 
@@ -51,14 +51,20 @@
 
 <HemisphereLight intensity={0.01} skyColor={0xffffff} />
 <DirectionalLight
-  intensity={0.4}
+  intensity={1}
   color={0xffffff}
   position={{ x: 1.3, y: 2, z: 4 }}
 />
+<DirectionalLight
+  intensity={0.1}
+  color={0xffffff}
+  position={{ x: -2, y: 1.3, z: 0 }}
+/>
+
 <Mesh
   material={planeMaterial}
   geometry={planeGeo}
-  position={{ x: 0, y: -0.57, z: 0 }}
+  position={{ x: 0, y: 0, z: 0 }}
   rotation={{ x: Math.PI / 2 }}
   receiveShadow
 />

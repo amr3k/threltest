@@ -4,14 +4,16 @@
   import Path from "./_path.svelte";
   import Dummy from "./_dummy.svelte";
   import Duck from "./_duck.svelte";
+  import Mirror from "./_mirror.svelte";
 </script>
 
 <main>
-  <Canvas>
+  <Canvas linear>
     <Scene />
     <!-- <Path /> -->
-    <!-- <Dummy /> -->
-    <Duck />
+    <Dummy />
+    <!-- <Duck /> -->
+    <Mirror />
   </Canvas>
 </main>
 
