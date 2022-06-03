@@ -5,6 +5,7 @@
   import Dummy from "./_dummy.svelte";
   import Duck from "./_duck.svelte";
   import Mirror from "./_mirror.svelte";
+  import Shiny from "./_shiny.svelte";
 </script>
 
 <main>
@@ -14,6 +15,7 @@
     <Dummy />
     <!-- <Duck /> -->
     <Mirror />
+    <Shiny />
   </Canvas>
 </main>
 
