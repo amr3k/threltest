@@ -5,7 +5,7 @@
 </script>
 
 <GLTF
-  url="/duck.glb"
+  url="https://objectstorage.uk-london-1.oraclecloud.com/p/9UuYjfIdN4d_FIQDtjaIb19HykH0HFpW_cNhr_8nhT9812X1zq_xSo3rvS-wWj1P/n/lrndgw2ybfhm/b/a3k/o/duck.glb"
   position={{ x: 0, y: 0, z: 0 }}
   scale={{ x: 0.1, y: 0.1, z: 0.1 }}
   rotation={{
