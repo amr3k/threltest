@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { GLTF } from "threlte";
+  import { GLTF } from "@threlte/extras";
 
   const degreeToRadian = (num: number) => num * (Math.PI / 180);
 </script>

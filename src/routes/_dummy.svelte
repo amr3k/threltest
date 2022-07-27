@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { GLTF } from "threlte";
-  import { useGltfAnimations } from "threlte/extras";
+  import { useGltfAnimations, GLTF } from "@threlte/extras";
 
   const { gltf, actions } = useGltfAnimations<"Confused">(({ actions }) => {
     // Either play your animations as soon as they are loaded

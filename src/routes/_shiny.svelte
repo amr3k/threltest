@@ -1,39 +1,45 @@
-<script>
-  import { useThrelte } from "threlte";
+<script lang="ts">
+  import { Mesh, Object3DInstance, useFrame } from "@threlte/core";
   import {
-    Mesh,
+    Mesh as ThreeMesh,
     SphereGeometry,
     MeshPhongMaterial,
     CubeCamera,
-    Object3D,
     LinearMipmapLinearFilter,
     WebGLCubeRenderTarget,
+    sRGBEncoding,
   } from "three";
-  import { onDestroy } from "svelte";
-
-  const { scene } = useThrelte();
 
   const cubeRenderTarget = new WebGLCubeRenderTarget(128, {
     generateMipmaps: true,
     minFilter: LinearMipmapLinearFilter,
+    encoding: sRGBEncoding,
   });
+
   const cubeCamera = new CubeCamera(0.1, 1000, cubeRenderTarget);
-  const material = new MeshPhongMaterial({
+
+  const ballMaterial = new MeshPhongMaterial({
+    // color: 0x7f7f7f,
     envMap: cubeRenderTarget.texture,
-    reflectivity: 1,
-    shininess: 100,
   });
-  const pivot = new Object3D();
 
-  const ball = new Mesh(new SphereGeometry(0.5, 32, 32), material);
-  ball.position.set(0, 0.5, 1);
-  ball.castShadow = true;
-  ball.receiveShadow = true;
-  ball.add(cubeCamera);
-  pivot.add(ball);
-  scene.add(pivot);
+  let mesh: ThreeMesh;
 
-  onDestroy(() => {
-    scene.remove(pivot);
+  useFrame(({ scene, renderer }) => {
+    if (!scene || !renderer) return;
+    mesh.visible = false;
+    cubeCamera.update(renderer, scene);
+    mesh.visible = true;
   });
 </script>
+
+<Mesh
+  bind:mesh
+  geometry={new SphereGeometry(0.5, 32, 32)}
+  material={ballMaterial}
+  castShadow
+  receiveShadow
+  position={{ y: 0.5, z: 1 }}
+>
+  <Object3DInstance object={cubeCamera} />
+</Mesh>

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { GLTF, Group, Mesh, Pass, useThrelte } from "threlte";
-  import { useGltfAnimations } from "threlte/extras";
+  import { Group, Mesh, Pass, useThrelte } from "@threlte/core";
+  import { GLTF, useGltfAnimations } from "@threlte/extras";
   import type { Group as THREEGroup, Object3D, SkinnedMesh, Bone } from "three";
   import { Vector2, BoxBufferGeometry, MeshBasicMaterial } from "three";
   import { browser } from "$app/env";
